@@ -2,9 +2,10 @@ $(document)
 	.ready(
 		function()
 		{
-			//var fs = require("fs");			//	Libreria FileSystem
-			var buf;						//	Buffer par la imagen a guardar
-			var	$snapshot;					//	SnapShot de la camara
+			var fs = require("fs");						//	Libreria FileSystem
+			var buf;									//	Buffer par la imagen a guardar
+			var	$snapshot;								//	SnapShot de la camara
+			var	$clone = $("input.toDownload").clone();	//	Clon del input de descarga
 
 			Webcam.attach('#my_camera');	//	Visualizo la camara
 
@@ -15,23 +16,22 @@ $(document)
 						.snap(
 							function(data_uri)
 							{
-								$('<img>')					//	Inserto el snapshot
-									.attr('src',data_uri)
-									.appendTo(
-										$('#my_result')
-									).cropper(
-										{
-											aspectRatio:		1			//	Imagen Cuadrada
-										,	autoCropArea:		0.1			//	Fuerzo el minimo del area del cropper
-										,	strict:				true		//	Fuerzo que no pueda moverme fuera de la imagen
-										,	cropBoxResizable:	false		//	Evito que el cropper cambie de tamaño
-										,	guides:				false		//	Oculto las guias del cropper
-										,	minCropBoxWidth:	150			//	Fuerzo el minimo del ancho a 150px
-										,	minCropBoxHeight:	150			//	Fuerzo el minimo del alto a 150px
-										}
-									);
-
-								$snapshot = $('#my_result img')
+								$snapshot
+								=	$('<img>')					//	Inserto el snapshot
+										.attr('src',data_uri)
+										.appendTo(
+											$('#my_result')
+										).cropper(
+											{
+												aspectRatio:		1			//	Imagen Cuadrada
+											,	autoCropArea:		0.1			//	Fuerzo el minimo del area del cropper
+											,	strict:				true		//	Fuerzo que no pueda moverme fuera de la imagen
+											,	cropBoxResizable:	false		//	Evito que el cropper cambie de tamaño
+											,	guides:				false		//	Oculto las guias del cropper
+											,	minCropBoxWidth:	150			//	Fuerzo el minimo del ancho a 150px
+											,	minCropBoxHeight:	150			//	Fuerzo el minimo del alto a 150px
+											}
+										);
 							}
 						);
 				}
@@ -57,8 +57,9 @@ $(document)
 				.click(
 					function()
 					{
-						
 						$('.wizard-back').attr('disabled',false)
+
+						app[$('.wizard-card-container .active').attr('action-name')]();
 
 						if	($('.wizard-card-container .active').attr('action-name') != 'saveCrop') {
 							
@@ -79,7 +80,6 @@ $(document)
 
 						}
 
-						app[$('.wizard-card-container .active').attr('action-name')]();
 
 					}
 				)
@@ -114,7 +114,9 @@ $(document)
 				.change(
 					function()
 					{
-						var filePath = $(this).val();						//	Obtengo el directorio donde guardara la imagen
+						var	$self = $(this)
+						var filePath = $self.val();						//	Obtengo el directorio donde guardara la imagen
+
 						if (filePath !== "") {								//	Verifico que no este vacio
 							fs
 								.writeFile(									//	Escribo el archivo
@@ -124,6 +126,14 @@ $(document)
 									{
 										if (err) 
 											alert("Unable to save file");
+										else {
+											$self
+												.parent()
+												.append(
+													$clone.attr('nwsaveas',$self.val()+'.jpg')
+												);
+											$self.remove();
+										}
 									}
 								);
 						}
