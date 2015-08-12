@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width initial-scale=1">
+		<title>Webcam</title>
+		<!-- Librerias -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/cropper.min.css" rel="stylesheet">
+		<link href="css/wizard.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<div  class="wizard">
+				<div class="wizard-dialog">
+					<div class="wizard-content">
+						<div class="wizard-header">
+							<button type="button" class="close wizard-close" aria-hidden="true">&times;</button>
+							<h3 class="wizard-title"></h3>
+							<span class="wizard-subtitle"></span>
+						</div>
+						<div class="wizard-body">
+							<div class="pull-left wizard-steps">
+								<div class="wizard-nav-container">
+									<ul class="nav wizard-nav-list">
+									</ul>
+								</div>
+								<div class="wizard-progress-container">
+									<div class="progress progress-striped">
+										<div class="progress-bar" style="width: 0%;"></div>
+									</div>
+								</div>
+							</div>
+							<form>
+								<div class="wizard-cards">
+									<div class="wizard-card-container">
+										<div class="wizard-card" data-cardname="webcam">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h3 class="panel-title">
+														En Vivo		
+													</h3>
+												</div>
+												<div class="panel-body" style="height:270px;">
+													<div id="my_camera" style="width:320px; height:240px;"></div>
+												</div>
+												<div class="panel-footer clearfix">
+													<button class="btn btn-primary pull-right takeSnapshot">
+														Tomar Foto
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="wizard-card" data-cardname="snapshot">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h3 class="panel-title">
+														Capturado		
+													</h3>
+												</div>
+												<div class="panel-body" style="height:270px;">
+													<div id="my_result" style="width:320px; height:240px;"></div>
+												</div>
+												<div class="panel-footer clearfix">
+													<button class="btn btn-primary pull-right takeCrop">
+														Obtener Seleccion
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="wizard-card" data-cardname="cropped">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h3 class="panel-title">
+														Seleccionado
+													</h3>
+												</div>
+												<div class="panel-body" style="height:270px;">
+													<div id="my_crop" style="width:240px; height:240px;"></div>
+												</div>
+												<div class="panel-footer clearfix">
+													<div class="input-group">
+														<input type="text" class="form-control" placeholder="DNI" name="dni">
+														<span class="input-group-btn">
+															<button class="btn btn-primary saveCrop">
+																Guardar
+															</button>
+															<input type="file" class="hidden toDownload" nwsaveas=".jpg"/>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="wizard-footer">
+										<div class="wizard-buttons-container">
+											<button class="btn wizard-cancel wizard-close" type="button">Cancel</button>
+											<div class="btn-group-single pull-right">
+												<button class="btn wizard-back" type="button">Back</button>
+												<button class="btn btn-primary wizard-next" type="button">Next</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery -->
+		<script src="js/jquery.min.js"></script>
+		<!-- Librerias -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/webcam.min.js"></script>
+		<script src="js/cropper.min.js"></script>
+		<!-- Aplicacion -->
+		<script src="js/main.js"></script>
+	</body>
+</html>
+
+
