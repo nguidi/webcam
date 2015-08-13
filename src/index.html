@@ -17,25 +17,30 @@
 				<div class="pull-left wizard-steps">
 					<div class="wizard-nav-container">
 						<ul class="nav wizard-nav-list">
-							<li class="wizard-nav-item active">
+							<li class="wizard-nav-item active" data-cardname="webcam">
 								<a class="wizard-nav-link">
 									<span class="glyphicon glyphicon-chevron-right"></span>
 									En Vivo
 								</a>
 							</li>
-							<li class="wizard-nav-item">
+							<li class="wizard-nav-item" data-cardname="snapshot">
 								<a class="wizard-nav-link">
 									<span class="glyphicon glyphicon-chevron-right"></span>
 									Capturado
 								</a>
 							</li>
-							<li class="wizard-nav-item">
+							<li class="wizard-nav-item" data-cardname="cropped">
 								<a class="wizard-nav-link">
 									<span class="glyphicon glyphicon-chevron-right"></span>
 									Seleccionado
 								</a>
 							</li>
 						</ul>
+					</div>
+					<div class="wizard-progress-container">
+						<button class="btn btn-info btn-block wizard-reset" type="button">
+							Reiniciar
+						</button>
 					</div>
 				</div>
 				<div class="wizard-cards">
@@ -44,23 +49,27 @@
 							<div class="page-header">
 								<h3>En Vivo</h3>
 							</div>
-							<div id="my_camera" style="width:374px; height:280px;"></div>
-							
+							<div id="my_camera" style="width:390px; height:280px;"></div>
 						</div>
 						<div class="wizard-card" data-cardname="snapshot" action-name="takeCrop" action-title="Obtener Seleccion">
-							<h3>Capturado</h3>
-							<div id="my_result" style="width:374px; height:280px;"></div>
-							
+							<div class="page-header">
+								<h3>Capturado</h3>
+							</div>
+							<div id="my_result" style="width:390px; height:280px;">
+								<img>
+							</div>
 						</div>
 						<div class="wizard-card" data-cardname="cropped" action-name="saveCrop" action-title="Guardar Imagen">
-							<h3>Seleccionado</h3>
-							<div id="my_crop" style="width:280px; height:280px;"></div>
+							<div class="page-header">
+								<h3>Seleccionado</h3>
+							</div>
+							<div id="my_crop" class="center-block" style="width:280px; height:280px;"></div>
 							<input type="text" class="form-control" placeholder="DNI" name="dni">
 							<input type="file" class="hidden toDownload" nwsaveas=".jpg"/>
 						</div>
 					</div>
 					<div class="wizard-footer">
-						<div class="wizard-buttons-container">
+						<div class="wizard-buttons-container clearfix">
 							<div class="btn-group-single pull-right">
 								<button class="btn wizard-back" type="button">
 									Volver

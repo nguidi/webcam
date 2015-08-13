@@ -4,10 +4,24 @@ $(document)
 		{
 			var fs = require("fs");						//	Libreria FileSystem
 			var buf;									//	Buffer par la imagen a guardar
-			var	$snapshot;								//	SnapShot de la camara
-			var	$clone = $("input.toDownload").clone();	//	Clon del input de descarga
+			var	$snapshot = $('#my_result img')			//	SnapShot de la camara
 
 			Webcam.attach('#my_camera');	//	Visualizo la camara
+
+			$snapshot
+				.cropper(
+					{
+						aspectRatio:		1			//	Imagen Cuadrada
+					,	autoCropArea:		0.1			//	Fuerzo el minimo del area del cropper
+					,	strict:				true		//	Fuerzo que no pueda moverme fuera de la imagen
+					,	cropBoxResizable:	false		//	Evito que el cropper cambie de tamaño
+					,	guides:				false		//	Oculto las guias del cropper
+					,	minCropBoxWidth:	150			//	Fuerzo el minimo del ancho a 150px
+					,	minCropBoxHeight:	150			//	Fuerzo el minimo del alto a 150px
+					,	zoomable:			false		//	Fuerzo que no se pueda hacer zoom sobre la imagen
+					}
+				);
+
 
 			var app = {
 				takeSnapshot: function()		//	Tomo la foto e instancio el cropper
@@ -17,21 +31,7 @@ $(document)
 							function(data_uri)
 							{
 								$snapshot
-								=	$('<img>')					//	Inserto el snapshot
-										.attr('src',data_uri)
-										.appendTo(
-											$('#my_result')
-										).cropper(
-											{
-												aspectRatio:		1			//	Imagen Cuadrada
-											,	autoCropArea:		0.1			//	Fuerzo el minimo del area del cropper
-											,	strict:				true		//	Fuerzo que no pueda moverme fuera de la imagen
-											,	cropBoxResizable:	false		//	Evito que el cropper cambie de tamaño
-											,	guides:				false		//	Oculto las guias del cropper
-											,	minCropBoxWidth:	150			//	Fuerzo el minimo del ancho a 150px
-											,	minCropBoxHeight:	150			//	Fuerzo el minimo del alto a 150px
-											}
-										);
+									.cropper('replace',data_uri);
 							}
 						);
 				}
@@ -110,13 +110,25 @@ $(document)
 					}
 				)
 
+			$('.wizard-reset')
+				.click(
+					function()
+					{
+						$('.wizard-nav-item').removeClass('success')
+						$('.wizard-nav-item').removeClass('active')
+						$('.wizard-nav-item[data-cardname="webcam"]').addClass('active')
+
+						$('.wizard-card.active').removeClass('active')
+						$('.wizard-card[data-cardname="webcam"]').addClass('active')
+					}
+				)
+
 			$("input.toDownload")			//	Guardo la imagen
 				.change(
 					function()
 					{
-						var	$self = $(this)
-						var filePath = $self.val();						//	Obtengo el directorio donde guardara la imagen
-
+						var filePath = $(this).val();						//	Obtengo el directorio donde guardara la imagen
+						$('input[name="dni"]').val(filePath.split('/').pop().split('.').shift());
 						if (filePath !== "") {								//	Verifico que no este vacio
 							fs
 								.writeFile(									//	Escribo el archivo
@@ -124,15 +136,27 @@ $(document)
 								,	buf
 								,	function callback(err)					//	Si ocurrio un error
 									{
-										if (err) 
-											alert("Unable to save file");
+										if (err) {
+											alert("No se pudo guardar el archivo.");
+										}
 										else {
-											$self
-												.parent()
-												.append(
-													$clone.attr('nwsaveas',$self.val()+'.jpg')
-												);
-											$self.remove();
+											var	notification
+											=	new Notification(
+													"Aviso"
+												,	{
+														body: "Imagen guardada satisfactoriamente"
+													}
+												)
+											notification
+												.onshow = function () {
+													setTimeout(
+														function()
+														{
+															notification.close();
+														}
+													,	5000
+													);
+												}
 										}
 									}
 								);

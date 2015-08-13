@@ -1,0 +1,14 @@
+{
+	"name":		"Webcam"
+,	"version":	"0.0.1"
+,	"main":		"index.html"
+,	"window":
+	{
+		"width":		640
+	,	"height":		440
+	,	"frame":		true
+	,	"toolbar":		false
+	,	"icon":			"../icons/webcam.ico"
+	,	"resizable":	false
+	}
+}

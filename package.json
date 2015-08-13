@@ -1,13 +1,8 @@
 {
-  "name": "nw-demo",
-  "version": "0.0.1",
-  "main": "index.html",
-  "window": {
-  	"width": 480,
-    "height": 640,
-    "min_width": 480,
-    "min_height": 640,
-    "max_width": 480,
-    "max_height": 640
-  }
+	"name":		"Webcam-Builder"
+,	"version":	"0.0.1"
+,	"devDependencies":
+	{
+		"nw-builder":	"latest"
+	}
 }
