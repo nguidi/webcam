@@ -3,6 +3,8 @@ $(document)
 		function()
 		{
 			var fs = require("fs");						//	Libreria FileSystem
+			var path = require('path');					//	Libreria de directorios
+			var notifier = require('node-notifier');	//	Libreria de Notificaciones
 			var buf;									//	Buffer par la imagen a guardar
 			var	$snapshot = $('#my_result img')			//	SnapShot de la camara
 
@@ -182,23 +184,15 @@ $(document)
 										}
 										else {
 											$('.wizard-reset').click();
-											var	notification
-											=	new Notification(
-													"Webcam"
-												,	{
-														body: "Imagen guardada satisfactoriamente"
-													}
-												);
-											notification
-												.onshow = function () {
-													setTimeout(
-														function()
-														{
-															notification.close();
-														}
-													,	5000
-													);
+											notifier
+												.notify(
+												{
+													title:		'Webcam'
+												,	message:	'Imagen guardada satisfactoriamente!'
+												,	time:		5000
 												}
+											);
+
 										}
 									}
 								);

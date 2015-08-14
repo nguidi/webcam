@@ -1,8 +1,10 @@
 {
-	"name":		"Webcam-Builder"
-,	"version":	"0.0.1"
-,	"devDependencies":
-	{
-		"nw-builder":	"latest"
-	}
+  "name": "Webcam-Builder",
+  "version": "0.0.1",
+  "devDependencies": {
+    "nw-builder": "latest"
+  },
+  "dependencies": {
+    "node-notifier": "^4.2.3"
+  }
 }
