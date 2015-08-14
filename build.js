@@ -4,11 +4,12 @@ var	NwBuilder
 =	new NwBuilder(
 		{
 			files:		'./src/**'
-		,	winIco:		'./icons/webcam.ico'
+		,	winIco:		'./src/img/webcam.ico'
+		,	version:	'0.8.6'
 		,	platforms:
 			[
 				'win32'
-			,	'linux32'
+			//,	'linux32'
 			]
 		}
 	);

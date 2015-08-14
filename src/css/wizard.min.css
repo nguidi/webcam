@@ -1,1 +1,143 @@
-.wizard{height:440px;width:640px}.wizard-body{padding:0;margin:0}.wizard-header{padding:9px 15px;border-bottom:0}.wizard-header h3{margin:0;line-height:35px;display:inline;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-family:inherit;font-weight:700;text-rendering:optimizelegibility;color:#333}.wizard-card>h3,li.wizard-nav-item{line-height:40px}.wizard-subtitle{font-weight:700;color:#AFAFAF;padding-left:20px}.wizard-steps{width:28%;height:440px;background-color:#f5f5f5;border-bottom-left-radius:6px;position:relative}.wizard-nav-container{padding-bottom:30px}.wizard-nav-list{margin-bottom:0}.wizard-nav-link .glyphicon-chevron-right{float:right;margin-top:12px;margin-right:-6px;opacity:.25}li.wizard-nav-item.active .glyphicon-chevron-right{opacity:1}.wizard-nav-list>li>a{background-color:#f5f5f5;padding:3px 15px 3px 20px;cursor:default;color:#B4B4B4}.wizard-nav-list>li>a:hover{background-color:transparent}.wizard-nav-list>li.already-visited>a.wizard-nav-link{color:#08C;cursor:pointer}.wizard-nav-list>li.active>a.wizard-nav-link{color:#fff}.wizard-nav-item .already-visited .active,.wizard-nav-list li.active>a{background-color:#08C}.wizard-nav-list li.success>a{background-color:#5cb85c;color:#fff}.wizard-body form{padding:0;margin:0}.wizard-card>h3,.wizard-input-section{margin-bottom:20px}.wizard-progress-container{margin-top:20px;padding:15px;width:100%;position:absolute;bottom:0}.wizard-card-container{margin-left:28%;height:380px}.wizard-card,.wizard-error,.wizard-failure,.wizard-loading,.wizard-success{border-top:1px solid #EEE;padding:20px 35px 0;overflow-y:auto;height:380px;display:none}.wizard-card.active{display:block}.wizard-card-overlay{overflow-y:initial}.wizard-card>h3{margin-top:0;font-size:21px;font-weight:400}.wizard-footer{padding:0;height:60px;border-top:1px solid #eee}.wizard-buttons-container{padding:15px 40px 0}.wizard-buttons-container button{height:30px}.wizard-cancel{margin-left:12px}.wizard-dialog .popover.error-popover{background-color:#F2DEDE;color:#B94A48;border-color:#953B39}.wizard-dialog .popover.error-popover .arrow::after{border-right-color:#F2DEDE}.wizard-dialog .popover.error-popover .popover-title{display:none}.wizard-dialog .popover.error-popover .arrow{border-right-color:#953B39}.wizard-next{width:150px}.wizard-back{width:70px}
+.wizard {
+    height: 410px;
+    width: 640px;
+}
+.wizard-body {
+    padding: 0;
+    margin: 0;
+}
+.wizard-header {
+    padding: 9px 15px;
+    border-bottom: 0;
+}
+.wizard-header h3 {
+    margin: 0;
+    line-height: 35px;
+    display: inline;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: inherit;
+    font-weight: 700;
+    text-rendering: optimizelegibility;
+    color: #333;
+}
+.wizard-card>h3, li.wizard-nav-item {
+    line-height: 40px;
+}
+.wizard-subtitle {
+    font-weight: 700;
+    color: #AFAFAF;
+    padding-left: 20px;
+}
+.wizard-steps {
+    width: 28%;
+    height: 410px;
+    background-color: #f5f5f5;
+    border-bottom-left-radius: 6px;
+    position: relative;
+}
+.wizard-nav-container {
+    padding-bottom: 30px;
+}
+.wizard-nav-list {
+    margin-bottom: 0;
+}
+.wizard-nav-link .glyphicon-chevron-right,
+.wizard-nav-link .glyphicon-ok {
+    float: right;
+    margin-top: 12px;
+    margin-right: -6px;
+}
+.wizard-nav-list>li>a {
+    background-color: #f5f5f5;
+    padding: 3px 15px 3px 20px;
+    cursor: default;
+    color: #B4B4B4;
+}
+.wizard-nav-list>li>a:hover {
+    background-color: transparent;
+}
+.wizard-nav-list>li.already-visited>a.wizard-nav-link {
+    color: #08C;
+    cursor: pointer;
+}
+.wizard-nav-list>li.active>a.wizard-nav-link {
+    color: #fff;
+}
+.wizard-nav-item .already-visited .active, .wizard-nav-list li.active>a {
+    background-color: #08C;
+}
+.wizard-nav-list li.success>a {
+    background-color: #5cb85c;
+    color: #fff;
+}
+.wizard-body form {
+    padding: 0;
+    margin: 0;
+}
+.wizard-card>h3, .wizard-input-section {
+    margin-bottom: 20px;
+}
+.wizard-progress-container {
+    margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    overflow-y: hidden;
+}
+.wizard-card-container {
+    margin-left: 28%;
+    height: 350px;
+}
+.wizard-card, .wizard-error, .wizard-failure, .wizard-loading, .wizard-success {
+    border-top: 1px solid #EEE;
+    padding: 20px 35px 0;
+    overflow-y: hidden;
+    height: 350px;
+    display: none;
+}
+.wizard-card.active {
+    display: block;
+}
+.wizard-card-overlay {
+    overflow-y: initial;
+}
+.wizard-card>h3 {
+    margin-top: 0;
+    font-size: 21px;
+    font-weight: 400;
+}
+.wizard-footer {
+    padding: 0;
+    height: 60px;
+    border-top: 1px solid #eee;
+}
+.wizard-buttons-container {
+    padding: 15px 40px 0;
+}
+.wizard-buttons-container button {
+    height: 30px;
+}
+.wizard-cancel {
+    margin-left: 12px;
+}
+.wizard-dialog .popover.error-popover {
+    background-color: #F2DEDE;
+    color: #B94A48;
+    border-color: #953B39;
+}
+.wizard-dialog .popover.error-popover .arrow::after {
+    border-right-color: #F2DEDE;
+}
+.wizard-dialog .popover.error-popover .popover-title {
+    display: none;
+}
+.wizard-dialog .popover.error-popover .arrow {
+    border-right-color: #953B39;
+}
+.wizard-next {
+    width: 150px;
+}
+.wizard-back {
+    width: 70px;
+}

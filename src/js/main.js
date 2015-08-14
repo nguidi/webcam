@@ -6,7 +6,18 @@ $(document)
 			var buf;									//	Buffer par la imagen a guardar
 			var	$snapshot = $('#my_result img')			//	SnapShot de la camara
 
-			Webcam.attach('#my_camera');	//	Visualizo la camara
+			Webcam.attach('#my_camera')	//	Visualizo la camara
+
+			Webcam
+				.on(
+					'live'
+				,	function()
+					{
+						$('.wizard-next').attr('disabled',false)
+						$('img.loading').remove()
+					}
+				);
+
 
 			$snapshot
 				.cropper(
@@ -53,16 +64,30 @@ $(document)
 				}
 			}
 
+			$('button')
+				.click(
+					function()
+					{
+						$(this).blur()
+					}
+				)
+
 			$('.wizard-next')
 				.click(
 					function()
 					{
 						$('.wizard-back').attr('disabled',false)
 
+						$('.wizard-reset').attr('disabled',false)
+
 						app[$('.wizard-card-container .active').attr('action-name')]();
 
 						if	($('.wizard-card-container .active').attr('action-name') != 'saveCrop') {
 							
+							$('.wizard-nav-list .active .glyphicon')
+								.removeClass('glyphicon-chevron-right')
+								.addClass('glyphicon-ok');
+
 							$('.wizard-nav-list .active')
 								.removeClass('active')
 								.addClass('success')
@@ -74,13 +99,11 @@ $(document)
 								.next()
 								.addClass('active');
 
-							$('.wizard-next')
-								.attr('action-to-do',$('.wizard-card-container .active').attr('action-name'))
-								.html($('.wizard-card-container .active').attr('action-title'));
-
 						}
 
-
+						$('.wizard-next')
+							.attr('action-to-do',$('.wizard-card-container .active').attr('action-name'))
+							.html($('.wizard-card-container .active').attr('action-title'));
 					}
 				)
 
@@ -88,6 +111,10 @@ $(document)
 				.click(
 					function()
 					{
+						$('.wizard-nav-list .active .glyphicon')
+							.removeClass('glyphicon-ok')
+							.addClass('glyphicon-chevron-right');
+
 						$('.wizard-nav-list .active')
 							.removeClass('active')
 							.prev()
@@ -104,7 +131,10 @@ $(document)
 							.html($('.wizard-card-container .active').attr('action-title'));
 						
 						if	($('.wizard-card-container .active').attr('action-name') == 'takeSnapshot')
-							$('.wizard-back').attr('disabled',true);
+							{
+								$('.wizard-back').attr('disabled',true);
+								$('.wizard-reset').attr('disabled',true)
+							}
 						else
 							$('.wizard-back').attr('disabled',false);
 					}
@@ -114,12 +144,24 @@ $(document)
 				.click(
 					function()
 					{
-						$('.wizard-nav-item').removeClass('success')
-						$('.wizard-nav-item').removeClass('active')
-						$('.wizard-nav-item[data-cardname="webcam"]').addClass('active')
+						$('.wizard-nav-item').removeClass('success');
+						$('.wizard-nav-item').removeClass('active');
+						$('.wizard-nav-item[data-cardname="webcam"]').addClass('active');
 
-						$('.wizard-card.active').removeClass('active')
-						$('.wizard-card[data-cardname="webcam"]').addClass('active')
+						$('.wizard-card.active').removeClass('active');
+						$('.wizard-card[data-cardname="webcam"]').addClass('active');
+
+						$('form.wizard-form')[0].reset();
+
+						$('.wizard-back').attr('disabled',true);
+
+						$('.wizard-next')
+							.attr('action-to-do',$('.wizard-card-container .active').attr('action-name'))
+							.html($('.wizard-card-container .active').attr('action-title'));
+
+						$('.wizard-nav-list .glyphicon')
+							.removeClass('glyphicon-ok')
+							.addClass('glyphicon-chevron-right');
 					}
 				)
 
@@ -128,7 +170,6 @@ $(document)
 					function()
 					{
 						var filePath = $(this).val();						//	Obtengo el directorio donde guardara la imagen
-						$('input[name="dni"]').val(filePath.split('/').pop().split('.').shift());
 						if (filePath !== "") {								//	Verifico que no este vacio
 							fs
 								.writeFile(									//	Escribo el archivo
@@ -140,13 +181,14 @@ $(document)
 											alert("No se pudo guardar el archivo.");
 										}
 										else {
+											$('.wizard-reset').click();
 											var	notification
 											=	new Notification(
-													"Aviso"
+													"Webcam"
 												,	{
 														body: "Imagen guardada satisfactoriamente"
 													}
-												)
+												);
 											notification
 												.onshow = function () {
 													setTimeout(
@@ -161,17 +203,6 @@ $(document)
 									}
 								);
 						}
-					}
-				);
-
-			$('input[name="dni"]')			//	Obtengo el nombre de la imagen a guardar
-				.keyup(
-					function(ev)
-					{
-						if	(ev.keyCode == 13)
-							$('input.toDownload').click()									//	LLamo a la descarga de la imagen
-						else
-							$('input.toDownload').attr('nwsaveas',$(this).val()+'.jpg');	//	Cambio el nombre de la imagen
 					}
 				);
 		}
